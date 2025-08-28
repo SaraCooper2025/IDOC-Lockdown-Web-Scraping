@@ -1,0 +1,22 @@
+name: Scheduled Python Script
+on:
+  schedule:
+    # runs at 10:45 AM CST every day
+    - cron: '0 10 * * *'
+jobs:
+  run_python_script:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Checkout repository
+      uses: actions/checkout@v3
+
+      -name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+      -name: Install dependencies
+      run: pip install -r requirements.txt
+
+      -name: Run Python script
+      run:IDOC_Lockdown_Web_Scraping.py
