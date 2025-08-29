@@ -1,22 +1,32 @@
-name: Scheduled Python Script
+name: Hourly Scraper
 on:
   schedule:
     # runs at 10:45 AM CST every day
-    - cron: '0 10 * * *'
+    - cron: '10 * * * *'
 jobs:
-  run_python_script:
+  run_scraper:
     runs-on: ubuntu-latest
     steps:
-      -name: Checkout repository
+      -name: Check out repo
       uses: actions/checkout@v3
 
       -name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.10'
 
       -name: Install dependencies
-      run: pip install -r requirements.txt
+      run: | 
+      python -m pip install --upgrade pip
+      if [ -f requirement.txt]; then pip install -requirements.txt; fi
 
-      -name: Run Python script
-      run:IDOC_Lockdown_Web_Scraping.py
+      -name: Run scraper
+      run:IDOC_Lockdown_Web_Scraping.python
+
+      -name: Commit results
+      run: |
+        git config user.name "github_actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add lockdown_data.csv
+        git commit -m "Update lockdown data [skip ci]" || echo "No changes to commit"
+        git push
