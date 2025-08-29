@@ -85,7 +85,6 @@ async def main():
                 results.append({"URL": facility_name, "Full Lockdown": False, "Partial Lockdown": False, "Error": str(e)})
         await browser.close()
     df = pd.DataFrame(results)
-    print(df)
     return df # Return the DataFrame
 asyncio.run(main())
 
