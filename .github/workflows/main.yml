@@ -2,7 +2,7 @@ name: Run Scraper Hourly
 
 on:
   schedule:
-    - cron: "46 * * * *"   # every hour, on the hour (UTC)
+    - cron: "00 * * * *"   # every hour, on the hour (UTC)
   workflow_dispatch:       # lets you trigger manually too
 
 permissions:
