@@ -33,6 +33,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add lockdown_data.csv
+          git add *.csv
           git commit -m "Update lockdown data [skip ci]" || echo "No changes to commit"
           git push
