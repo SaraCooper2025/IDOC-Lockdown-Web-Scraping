@@ -1,9 +1,10 @@
-name: Hourly Scraper
+name: Run Scraper Hourly
+
 on:
   schedule:
-    # runs at 10:30 AM CST every day
-    - cron: '30 * * * *'
-  workflow_dispatch:
+    - cron: "40 * * * *"   # every hour, on the hour (UTC)
+  workflow_dispatch:       # lets you trigger manually too
+
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
