@@ -30,7 +30,7 @@ jobs:
         run: python IDOC_Lockdown_Web_Scraping.py
 
       - name: Upload CSV artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lockdown-data
           path: "*.csv"
