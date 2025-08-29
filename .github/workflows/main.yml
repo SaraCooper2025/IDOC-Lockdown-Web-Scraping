@@ -39,3 +39,8 @@ jobs:
         with:
           name: master-lockdown
           path: master_lockdown.csv
+      - name: Download master lockdown CSV
+        uses: actions/download-artifact@v4
+        with:
+          name: master-lockdown
+          path: ./data
