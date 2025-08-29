@@ -12,7 +12,10 @@ key_phrase = "on lockdown"
 cst_timezone = pytz.timezone('US/Central')
 now_cst = datetime.now(cst_timezone)
 current_date = now_cst.date()
+current_hour = datetime.now(cst_timezone).hour
 yesterday_date = (current_date)-timedelta(days=1)
+current_date_str = str(current_date)
+current_hour_str = str(current_hour)
 
 if now_cst.hour >= 23 or now_cst.hour < 7:
     shift = 'Shift 1'
@@ -60,13 +63,13 @@ async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
-        for url in urls:
+        for site in sites:
             try:
-                await page.goto(url)
+                await page.goto(site)
                 time.sleep(2)
                 content = await page.content()
                 found = key_phrase.lower() in content.lower()
-                facility_name = url.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
+                facility_name = site.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
                 if now_cst.hour >= 23 or now_cst.hour < 7:
                     shift = 'Shift 1'
                 elif now_cst.hour >= 7 and now_cst.hour < 15:
@@ -81,3 +84,6 @@ async def main():
     print(df)
     return df # Return the DataFrame
 asyncio.run(main())
+
+lockdown_data = asyncio.run(main())
+lockdown_data.to_csv(f'{current_date_str}_{current_hour_str}_{shift}_record.csv', index =False)
