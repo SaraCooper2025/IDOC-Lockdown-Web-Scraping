@@ -66,14 +66,14 @@ async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
-        for site in sites:
+        for url in urls:
             try:
-                await page.goto(site)
+                await page.goto(url)
                 time.sleep(2)
                 content = await page.content()
                 full_lockdown = int(key_phrase1.lower() in content.lower())
                 partial_lockdown = int(key_phrase2.lower()in content.lower())
-                facility_name = site.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
+                facility_name = url.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
                 if now_cst.hour >= 23 or now_cst.hour < 7:
                     shift = 'Shift 1'
                 elif now_cst.hour >= 7 and now_cst.hour < 15:
@@ -89,7 +89,7 @@ async def main():
     return df # Return the DataFrame
 asyncio.run(main())
 
-lockdown_data = ...
+lockdown_data = asyncio.run(main())
 
 master_file = "master_lockdown.csv"
 
@@ -98,5 +98,4 @@ if os.path.exists(master_file):
     master_df = pd.concat([master_df,lockdown_data], ignore_index=True)
 else:
     master_df = lockdown_data
-
 master_df.to_csv(master_file, index=False)
