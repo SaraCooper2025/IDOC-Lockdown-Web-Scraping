@@ -91,11 +91,18 @@ asyncio.run(main())
 
 lockdown_data = asyncio.run(main())
 
-master_file = "master_lockdown.csv"
+# Ensure data directory exists
+os.makedirs("data", exist_ok=True)
+
+master_file = "data/master_lockdown.csv"
 
 if os.path.exists(master_file):
     master_df = pd.read_csv(master_file)
-    master_df = pd.concat([master_df,lockdown_data], ignore_index=True)
+    master_df = pd.concat([master_df, lockdown_data], ignore_index=True)
 else:
     master_df = lockdown_data
+
+# Save the updated master file into /data folder
 master_df.to_csv(master_file, index=False)
+
+
