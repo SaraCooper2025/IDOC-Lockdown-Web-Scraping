@@ -66,14 +66,14 @@ async def main():
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         page = await browser.new_page()
-        for url in urls:
+        for site in sites:
             try:
-                await page.goto(url)
+                await page.goto(site)
                 time.sleep(2)
                 content = await page.content()
                 full_lockdown = int(key_phrase1.lower() in content.lower())
                 partial_lockdown = int(key_phrase2.lower()in content.lower())
-                facility_name = url.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
+                facility_name = site.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
                 if now_cst.hour >= 23 or now_cst.hour < 7:
                     shift = 'Shift 1'
                 elif now_cst.hour >= 7 and now_cst.hour < 15:
