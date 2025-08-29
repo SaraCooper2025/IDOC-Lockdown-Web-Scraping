@@ -34,3 +34,8 @@ jobs:
         with:
           name: lockdown-data
           path: "*.csv"
+      - name: Upload master CSV
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-lockdown
+          path: master_lockdown.cs
