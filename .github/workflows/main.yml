@@ -40,10 +40,10 @@ jobs:
           name: master-lockdown
           path: master_lockdown.csv
 
-      - name: Commit master_lockdown.csv to repo
+      - name: Commit updated master_lockdown.csv
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/master_lockdown.csv
+          git add data/master_lockdown.csv || echo "No file to add"
           git commit -m "Update master_lockdown.csv [skip ci]" || echo "No changes to commit"
           git push
