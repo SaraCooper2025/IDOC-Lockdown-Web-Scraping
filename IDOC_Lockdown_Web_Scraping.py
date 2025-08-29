@@ -89,8 +89,7 @@ async def main():
     return df # Return the DataFrame
 asyncio.run(main())
 
-lockdown_data = asyncio.run(main())
-lockdown_data.to_csv(f'{current_date_str}_{current_hour_str}_{shift}_record.csv', index =False)
+lockdown_data = ...
 
 master_file = "master_lockdown.csv"
 
