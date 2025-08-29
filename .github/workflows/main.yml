@@ -2,7 +2,7 @@ name: Run Scraper Hourly
 
 on:
   schedule:
-    - cron: "40 * * * *"   # every hour, on the hour (UTC)
+    - cron: "46 * * * *"   # every hour, on the hour (UTC)
   workflow_dispatch:       # lets you trigger manually too
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.11.9"
 
       - name: Install dependencies
         run: |
