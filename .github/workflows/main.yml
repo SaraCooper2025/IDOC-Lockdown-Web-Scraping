@@ -2,7 +2,7 @@ name: Hourly Scraper
 on:
   schedule:
     # runs at 10:45 AM CST every day
-    - cron: '15 * * * *'
+    - cron: '18 * * * *'
 jobs:
   run_scraper:
     runs-on: ubuntu-latest
