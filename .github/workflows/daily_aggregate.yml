@@ -2,8 +2,8 @@ name: Daily Rollup
 
 on:
   schedule:
-    - cron: "0 7 * * *"  # Runs every day at 1 am CST (6 AM UTC)
-  workflow_dispatch:
+    - cron: "30 6 * * *"  # Runs every day at 12:20am CST, 1:30am EST (6 AM UTC) to avoid concurrent running with main.yml
+  workflow_dispatch:     # lets you trigger manually
 
 permissions:
   contents: write
@@ -23,7 +23,7 @@ jobs:
         run: pip install pandas pytz
 
       - name: Run daily rollup
-        run: python master_tracker.py
+        run: python IDOC_Lockdown_Daily_Aggregation.py
 
       - name: Commit changes
         run: |
