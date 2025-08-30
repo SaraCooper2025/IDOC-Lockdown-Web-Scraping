@@ -15,19 +15,19 @@ key_phrase1 = "No visits"
 key_phrase2 = "limited visits"
 
 ## define time parameters -- set everything to EST because of shift timing (see below)
-cst_timezone = pytz.timezone('US/Eastern')
-now_cst = datetime.now(cst_timezone)
-current_time = now_cst.time()
-current_date = now_cst.date()
-current_hour = datetime.now(cst_timezone).hour
+est_timezone = pytz.timezone('US/Eastern')
+now_est = datetime.now(est_timezone)
+current_time = now_est.time()
+current_date = now_est.date()
+current_hour = datetime.now(est_timezone).hour
 yesterday_date = (current_date)-timedelta(days=1)
 current_date_str = str(current_date)
 current_hour_str = str(current_hour)
 
 ## IDOC shifts are 11pm-7am, 7am-3pm, 3pm-11pm -- timezone is set to EST so that all shifts fall within a single day 
-if now_cst.hour >= 0 or now_cst.hour < 8:
+if now_est.hour >= 0 or now_est.hour < 8:
     shift = 'Shift 1'
-elif now_cst.hour >= 8 and now_cst.hour < 14:
+elif now_est.hour >= 8 and now_est.hour < 14:
     shift = 'Shift 2'
 else:
     shift = 'Shift 3'
@@ -86,6 +86,13 @@ async def main():
                 partial_lockdown = int(key_phrase2.lower()in content.lower())
                 ## get the facility name from the url
                 facility_name = url.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
+                ## IDOC shifts are 11pm-7am, 7am-3pm, 3pm-11pm -- timezone is set to EST so that all shifts fall within a single day 
+                if now_cst.hour >= 0 or now_cst.hour < 8:
+                    shift = 'Shift 1'
+                elif now_cst.hour >= 8 and now_cst.hour < 14:
+                    shift = 'Shift 2'
+                else:
+                    shift = 'Shift 3'
                 ## structure the results
                 results.append({"Facility": facility_name, "Full Lockdown": full_lockdown, "Partial Lockdown": partial_lockdown, "Date": current_date, "Time": now_cst, "Shift": shift})
             except Exception as e:
