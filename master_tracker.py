@@ -1,5 +1,4 @@
 import pandas as pd
-import requests
 from datetime import timedelta
 from datetime import datetime, date
 import pytz
