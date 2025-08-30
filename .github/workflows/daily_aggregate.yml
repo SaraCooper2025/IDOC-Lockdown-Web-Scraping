@@ -32,3 +32,5 @@ jobs:
           git add data/master_lockdown.csv data/daily_agg.csv
           git commit -m "Daily rollup update [skip ci]" || echo "No changes to commit"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
