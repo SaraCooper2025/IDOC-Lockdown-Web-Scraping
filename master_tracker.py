@@ -14,7 +14,7 @@ df = pd.read_csv("./data/master_lockdown.csv")
 
 df['Date'] = pd.to_datetime(df['Date'])
 
-filtered_date = df[df['Date'].dt.date == yesterday_date]
+filtered_date = df[df['Date'].dt.date == current_date]
 
 Daily_AGG = (
     filtered_date
