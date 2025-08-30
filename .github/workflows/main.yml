@@ -38,7 +38,7 @@ jobs:
           name: lockdown-data
           path: "*.csv"
 
-      - name: Commit updated master_lockdown.csv
+      - name: Commit updated daily_scrape.csv
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
