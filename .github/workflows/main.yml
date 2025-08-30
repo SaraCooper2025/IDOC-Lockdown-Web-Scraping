@@ -32,17 +32,11 @@ jobs:
       - name: Run scraper
         run: python IDOC_Lockdown_Web_Scraping.py
 
-      - name: Upload CSV artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: lockdown-data
-          path: "data/*.csv"
-
       - name: Commit updated daily_scrape.csv
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/master_lockdown.csv || echo "No file to add"
+          git add data/daily_scrape.csv || echo "No file to add"
           git commit -m "Update master_lockdown.csv [skip ci]" || echo "No changes to commit"
           git push
         env:
