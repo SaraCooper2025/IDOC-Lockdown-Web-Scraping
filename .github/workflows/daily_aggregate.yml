@@ -20,7 +20,7 @@ jobs:
         run: pip install pandas pytz
 
       - name: Run daily rollup
-        run: master_tracker.py
+        run: python master_tracker.py
 
       - name: Commit changes
         run: |
