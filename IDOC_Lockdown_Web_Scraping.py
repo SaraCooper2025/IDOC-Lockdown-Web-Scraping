@@ -94,7 +94,6 @@ async def main():
     ## load the results and return as a dataframe
     df = pd.DataFrame(results)
     return df
-asyncio.run(main())
 
 ## set this script to create a CSV file in my repository under a /data folder and to update it with new results when script is run through GitHub Actions
 lockdown_data = asyncio.run(main())
