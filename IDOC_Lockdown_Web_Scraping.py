@@ -24,13 +24,7 @@ yesterday_date = (current_date)-timedelta(days=1)
 current_date_str = str(current_date)
 current_hour_str = str(current_hour)
 
-## IDOC shifts are 11pm-7am, 7am-3pm, 3pm-11pm -- timezone is set to EST so that all shifts fall within a single day 
-if now_est.hour >= 0 or now_est.hour < 8:
-    shift = 'Shift 1'
-elif now_est.hour >= 8 and now_est.hour < 14:
-    shift = 'Shift 2'
-else:
-    shift = 'Shift 3'
+print(now_est.hour)
 
 ## this is the master list of IDOC facility lockdown pages
 urls = [
@@ -87,7 +81,7 @@ async def main():
                 ## get the facility name from the url
                 facility_name = url.split('https://idoc.illinois.gov/facilities/lockdowninformation/facility.')[1].split('.html')[0].replace('-', ' ')
                 ## IDOC shifts are 11pm-7am, 7am-3pm, 3pm-11pm -- timezone is set to EST so that all shifts fall within a single day 
-                if now_est.hour >= 0 or now_est.hour < 8:
+                if now_est.hour >= 0 and now_est.hour < 8:
                     shift = 'Shift 1'
                 elif now_est.hour >= 8 and now_est.hour < 14:
                     shift = 'Shift 2'
