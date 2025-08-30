@@ -94,9 +94,9 @@ async def main():
                 else:
                     shift = 'Shift 3'
                 ## structure the results
-                results.append({"Facility": facility_name, "Full Lockdown": full_lockdown, "Partial Lockdown": partial_lockdown, "Date": current_date, "Time": now_cst, "Shift": shift})
+                results.append({"Facility": facility_name, "Full Lockdown": full_lockdown, "Partial Lockdown": partial_lockdown, "Date": current_date, "Time": now_est, "Shift": shift})
             except Exception as e:
-                results.append({"Facility": facility_name, "Full Lockdown": False, "Partial Lockdown": False, "Date": current_date, "Time": now_cst, "Shift": shift, "Error": str(e)})
+                results.append({"Facility": facility_name, "Full Lockdown": False, "Partial Lockdown": False, "Date": current_date, "Time": now_est, "Shift": shift, "Error": str(e)})
         await browser.close()
     ## load the results and return as a dataframe
     df = pd.DataFrame(results)
