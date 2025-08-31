@@ -83,7 +83,7 @@ async def main():
                 ## IDOC shifts are 11pm-7am, 7am-3pm, 3pm-11pm -- timezone is set to EST so that all shifts fall within a single day 
                 if now_est.hour >= 0 and now_est.hour < 8:
                     shift = 'Shift 1'
-                elif now_est.hour >= 8 and now_est.hour < 14:
+                elif now_est.hour >= 8 and now_est.hour < 18:
                     shift = 'Shift 2'
                 else:
                     shift = 'Shift 3'
