@@ -18,8 +18,8 @@ df = pd.read_csv("./data/daily_scrape.csv")
 df['Date'] = pd.to_datetime(df['Date'])
 
 ## filter data so that it only includes results from the previous day
-## daily_scrape should already be cleared of historical data but may include current day data -- script will run at 1 am EST
-filtered_date = df[df['Date'].dt.date == current_date]
+## daily_scrape should already be cleared of historical data but may include current day data -- script will run at 1:30 am EST
+filtered_date = df[df['Date'].dt.date == yesterday_date]
 
 ## aggregate data by the [Facility] and [Shift] 
 daily_agg = (
