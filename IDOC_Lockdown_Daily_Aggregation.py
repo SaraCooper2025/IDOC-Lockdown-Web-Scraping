@@ -41,7 +41,7 @@ os.makedirs('data', exist_ok=True)
 ## create new file if it does not already exist, otherwise concat results to existing file
 if os.path.exists(master_tracker):
     master_df = pd.read_csv(master_tracker)
-    master_df = pd.concat([master_tracker, daily_agg], ignore_index=True)
+    master_df = pd.concat([master_df, daily_agg], ignore_index=True)
 else:
     master_df = daily_agg
 
