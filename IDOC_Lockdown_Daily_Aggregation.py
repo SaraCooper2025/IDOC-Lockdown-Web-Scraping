@@ -26,7 +26,8 @@ daily_agg = (
     filtered_date
         ## group by [Facility] and [Shift] so that each facility has 3 daily entries, one for each shift
         .groupby(['Facility','Shift'])
-        .agg(Date = ('Date','max'),
+        .agg(
+            Date = ('Date', lambda x: x.max().date()),
             Full_Lockdown = ('Full Lockdown', 'max'),
             Partial_Lockdown = ('Partial Lockdown', 'max'),
         )
