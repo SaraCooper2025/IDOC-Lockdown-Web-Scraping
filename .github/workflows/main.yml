@@ -27,7 +27,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: playwright install chromium
 
       - name: Run scraper
         run: python IDOC_Lockdown_Web_Scraping.py
